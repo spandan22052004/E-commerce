@@ -19,6 +19,9 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
 
+    // Controls whether password is visible
+    const [showPassword, setShowPassword] = useState(false);
+
     // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -66,6 +69,7 @@ const Register = () => {
 
             setOtpSent(true);
             setMessage(data.message || 'OTP sent to your email.');
+
         } catch (error) {
             setMessage(error.message);
         } finally {
@@ -103,6 +107,7 @@ const Register = () => {
 
             setEmailVerified(true);
             setMessage(data.message || 'Email verified successfully!');
+
         } catch (error) {
             setMessage(error.message);
         } finally {
@@ -139,6 +144,7 @@ const Register = () => {
 
             login(data);
             navigate('/');
+
         } catch (error) {
             setMessage(error.message);
         } finally {
@@ -165,6 +171,7 @@ const Register = () => {
 
                 {/* Email */}
                 <div className="input-group">
+
                     <input
                         type="email"
                         name="email"
@@ -186,11 +193,13 @@ const Register = () => {
                             ? 'Sending...'
                             : 'Send OTP'}
                     </button>
+
                 </div>
 
                 {/* OTP */}
                 {otpSent && !emailVerified && (
                     <div className="input-group">
+
                         <input
                             type="text"
                             placeholder="Enter 6-digit OTP"
@@ -207,28 +216,48 @@ const Register = () => {
                             onClick={handleVerifyOTP}
                             disabled={loading}
                         >
-                            {loading ? 'Please wait...' : 'Verify OTP'}
+                            {loading
+                                ? 'Please wait...'
+                                : 'Verify OTP'}
                         </button>
+
                     </div>
                 )}
 
                 {/* Verification message */}
                 {emailVerified && (
                     <p className="success-message">
-                         Email verified successfully
+                        ✓ Email verified successfully
                     </p>
                 )}
 
                 {/* Password */}
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Create a password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    minLength={6}
-                />
+                <div className="password-group">
+
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        name="password"
+                        placeholder="Create a password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        minLength={6}
+                    />
+
+                    <button
+                        type="button"
+                        className="password-toggle"
+                        onClick={() => setShowPassword(!showPassword)}
+                        aria-label={
+                            showPassword
+                                ? 'Hide password'
+                                : 'Show password'
+                        }
+                    >
+                        {showPassword ? '🙈' : '👁️'}
+                    </button>
+
+                </div>
 
                 {/* Status message */}
                 {message && !emailVerified && (
@@ -243,13 +272,17 @@ const Register = () => {
                     className="btn"
                     disabled={loading || !emailVerified}
                 >
-                    {loading ? 'Please wait...' : 'Register'}
+                    {loading
+                        ? 'Please wait...'
+                        : 'Register'}
                 </button>
 
                 {/* Login link */}
                 <p>
                     Already have an account?{' '}
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">
+                        Login
+                    </Link>
                 </p>
 
             </form>
@@ -259,4 +292,3 @@ const Register = () => {
 };
 
 export default Register;
-

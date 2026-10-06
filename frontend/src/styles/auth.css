@@ -1,87 +1,11 @@
-/* .auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70vh;
-}
-
-.auth-form {
-  background: #18181b;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  width: 100%;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.auth-form::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #f97316, transparent);
-  animation: shimmer 3s infinite linear;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(50%); }
-}
-
-.auth-form h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.auth-form input {
-  padding: 15px;
-  background: #09090b;
-  border: 1px solid #27272a;
-  border-radius: 8px;
-  font-size: 15px;
-  color: #fff;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.auth-form input:focus {
-  border-color: #f97316;
-  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
-}
-
-.auth-form p {
-  text-align: center;
-  margin-top: 15px;
-  color: #a1a1aa;
-}
-
-.auth-form a {
-  color: #f97316;
-  font-weight: 600;
-}
-
-.auth-form a:hover {
-  text-decoration: underline;
-}
- */
-
-
-
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 70vh;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
 }
 
 .auth-form {
@@ -91,14 +15,18 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 420px;
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     border: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     overflow: hidden;
 }
 
+/* Top animated orange line */
 .auth-form::before {
     content: '';
     position: absolute;
@@ -106,12 +34,14 @@
     left: -50%;
     width: 200%;
     height: 4px;
+
     background: linear-gradient(
         90deg,
         transparent,
         #f97316,
         transparent
     );
+
     animation: shimmer 3s infinite linear;
 }
 
@@ -125,6 +55,7 @@
     }
 }
 
+/* Heading */
 .auth-form h2 {
     text-align: center;
     font-size: 2rem;
@@ -132,19 +63,24 @@
     margin-bottom: 10px;
 }
 
+/* All form inputs */
 .auth-form input {
     padding: 15px;
     background: #09090b;
     border: 1px solid #27272a;
     border-radius: 8px;
+
     font-size: 15px;
     color: #fff;
+
     outline: none;
     transition: all 0.3s ease;
+
     width: 100%;
     box-sizing: border-box;
 }
 
+/* Input focus */
 .auth-form input:focus {
     border-color: #f97316;
     box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
@@ -155,8 +91,10 @@
     display: flex;
     gap: 10px;
     width: 100%;
+    box-sizing: border-box;
 }
 
+/* Input inside input group */
 .input-group input {
     flex: 1;
     min-width: 0;
@@ -166,30 +104,36 @@
 .btn {
     padding: 15px;
     background: #f97316;
+
     border: none;
     border-radius: 8px;
+
     color: white;
     font-size: 15px;
     font-weight: 600;
+
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
+/* Button hover */
 .btn:hover:not(:disabled) {
     background: #ea580c;
     transform: translateY(-1px);
 }
 
+/* Disabled button */
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* OTP button */
+/* OTP buttons */
 .otp-btn {
     padding: 12px 15px;
     white-space: nowrap;
     width: auto;
+    flex-shrink: 0;
 }
 
 /* Paragraphs */
@@ -199,6 +143,7 @@
     color: #a1a1aa;
 }
 
+/* Links */
 .auth-form a {
     color: #f97316;
     font-weight: 600;
@@ -223,4 +168,136 @@
 }
 
 
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+   ========================================= */
 
+@media (max-width: 600px) {
+
+    .auth-container {
+        min-height: 70vh;
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+
+    .auth-form {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 20px;
+        gap: 18px;
+    }
+
+    .auth-form h2 {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+
+    /*
+       Stack email input and Send OTP button
+       vertically on mobile.
+    */
+    .input-group {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .input-group input {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    /*
+       OTP / Send OTP button takes full width
+       on mobile.
+    */
+    .input-group .otp-btn {
+        width: 100%;
+        flex-shrink: 1;
+    }
+
+    .auth-form input {
+        width: 100%;
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .otp-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE SCREENS
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .auth-container {
+        padding: 10px;
+        padding-top: 20px;
+    }
+
+    .auth-form {
+        padding: 20px 15px;
+        border-radius: 12px;
+    }
+
+    .auth-form h2 {
+        font-size: 1.4rem;
+    }
+
+    .auth-form input {
+        padding: 13px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 13px;
+        font-size: 14px;
+    }
+}
+
+
+/* Password field with eye button */
+.password-group {
+    position: relative;
+    width: 100%;
+}
+
+.password-group input {
+    width: 100%;
+    padding-right: 50px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: transparent;
+    border: none;
+
+    color: #a1a1aa;
+    font-size: 18px;
+
+    cursor: pointer;
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: #f97316;
+    transform: translateY(-50%);
+}
